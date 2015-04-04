@@ -1,4 +1,5 @@
 # FuzzyRecord
+
 An `ActiveRecord` implementation of SQLf. This is a work in progress.
 
 ## Installation
@@ -22,6 +23,7 @@ Generate configuration files:
     $ rails g fuzzy_record:config
 
 ## Usage
+
 Add your definitions to `config/fuzzy_predicates.yml`.
 Example:
 ```yaml
@@ -46,7 +48,7 @@ and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-1. Fork it ( https://github.com/koombea/fuzzyrecord/fork )
+1. Fork it ( https://github.com/koombea/fuzzy-record/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
