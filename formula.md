@@ -6,7 +6,7 @@ switch (lfp->typefp)
             grmemb = 1.0;
         else if (varfp > lfp->minfp && varfp < lfp->core1) //decrece
             grmemb = (varfp - lfp->minfp*1.0)/(lfp->core1 - lfp->minfp);
-        else if (varfp >= lfp->core2 && varfp < lfp->maxfp) /crece
+        else if (varfp >= lfp->core2 && varfp < lfp->maxfp) //crece
             grmemb = (lfp->maxfp*1.0 - varfp)/(lfp->maxfp - lfp->core2);
     break;
     case 2: //decreciente
