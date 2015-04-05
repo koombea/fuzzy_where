@@ -1,4 +1,4 @@
-require "fuzzy_record/version"
+require 'fuzzy_record/version'
 
 # SQLf implementation for ActiveRecord
 module FuzzyRecord

@@ -1,25 +1,24 @@
 module FuzzyRecord
-  module ActiveRecordModelExtension
-    class FuzzyDerivative
-      attr_reader :query
-      def initialize(query, column, fuzzy_predicate)
-        @query           = query
-        @column          = column
-        @fuzzy_predicate = fuzzy_predicate
-      end
+  class FuzzyDerivative
+    attr_reader :query
 
-      def derivative_query
-        min = @fuzzy_predicate[:min]
-        max = @fuzzy_predicate[:max]
+    def initialize(query, column, fuzzy_predicate)
+      @query = query
+      @column = column
+      @fuzzy_predicate = fuzzy_predicate
+    end
 
-        if min && min != "infinite"
-          @query= @query.where("#{@column} >= ?", min)
-        end
-        if max && max != "infinite"
-          @query = @query.where("#{@column} <= ?", max)
-        end
-        @query
+    def derivative_query
+      min = @fuzzy_predicate[:min]
+      max = @fuzzy_predicate[:max]
+
+      if min && min != "infinite"
+        @query= @query.where("#{@column} >= ?", min)
       end
+      if max && max != "infinite"
+        @query = @query.where("#{@column} <= ?", max)
+      end
+      @query
     end
   end
 end
