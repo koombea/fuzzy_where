@@ -7,6 +7,8 @@ rescue LoadError
   #do nothing
 end
 
+
+
 require 'bundler/setup'
 Bundler.require
 
@@ -19,5 +21,7 @@ if defined? Rails
   require 'fake_app/rails_app'
   require 'rspec/rails'
 end
+
+require 'fuzzy_record'
 
 FIXTURES_PATH = Pathname.new(File.expand_path('../fixtures/', __FILE__))

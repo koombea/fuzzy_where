@@ -25,7 +25,7 @@ describe FuzzyRecord::Configuration do
   describe 'predicates_file' do
     context 'by default' do
       it 'should be nil' do
-        expect(config.predicates_file).to eq nil
+        expect(config.predicates_file).to eq Rails.root.join('config', 'fuzzy_predicates.yml')
       end
     end
     context 'configured via config block' do

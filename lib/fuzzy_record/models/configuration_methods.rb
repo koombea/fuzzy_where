@@ -1,8 +1,11 @@
 module FuzzyRecord
-  module ConfigurationMethods #:nodoc
-    extend ActiveSupport::Concern
-    module ClassMethods #:nodoc
+  module Models
+    module ConfigurationMethods #:nodoc
+      extend ActiveSupport::Concern
+      module ClassMethods #:nodoc
 
+      end
     end
   end
+  
 end

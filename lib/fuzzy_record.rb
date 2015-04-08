@@ -25,7 +25,7 @@ EOC
 # load FuzzyRecord components
 require 'fuzzy_record/config'
 require 'fuzzy_record/exceptions'
-require 'fuzzy_record/models/configuration_methods'
+require 'fuzzy_record/models'
 require 'fuzzy_record/hooks'
 # if not using Railtie, call `FuzzyRecord::Hooks.init` directly
 if defined? Rails
