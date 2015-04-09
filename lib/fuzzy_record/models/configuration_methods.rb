@@ -7,5 +7,4 @@ module FuzzyRecord
       end
     end
   end
-  
 end

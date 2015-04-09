@@ -6,7 +6,7 @@ module FuzzyRecord
       extend ActiveSupport::Concern
 
       included do
-        self.send(:include, FuzzyRecord::ConfigurationMethods)
+        self.send(:include, FuzzyRecord::Models::ConfigurationMethods)
 
         # Fuzzy Where
         eval <<-RUBY
@@ -17,8 +17,8 @@ module FuzzyRecord
             relation = where(nil)
             fuzzy_conditions.each do |column, predicate|
               pred_def = FuzzyRecord.config.fuzzy_predicate(predicate)
-              raise FuzzyError, "could not find fuzzy definition" unless pred_def
-              relation = FuzzyDerivative.new(relation, column, pred_def).derivative_query
+              raise FuzzyRecord::FuzzyError, "could not find fuzzy definition" unless pred_def
+              relation = FuzzyRecord::Models::FuzzyDerivative.new(relation, column, pred_def).derivative_query
             end
             relation
           end
@@ -26,5 +26,5 @@ module FuzzyRecord
       end
     end
   end
-  
+
 end

@@ -4,7 +4,7 @@ module FuzzyRecord
     def self.init
       ActiveSupport.on_load(:active_record) do
         require 'fuzzy_record/models/active_record_extension'
-        ::ActiveRecord::Base.send :include, FuzzyRecord::ActiveRecordExtension
+        ::ActiveRecord::Base.send :include, FuzzyRecord::Models::ActiveRecordExtension
       end
     end
   end

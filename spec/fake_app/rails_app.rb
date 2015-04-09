@@ -1,6 +1,6 @@
 # require 'rails/all'
 require 'action_controller/railtie'
-require 'action_view/railtie'
+
 
 require 'fake_app/active_record/config' if defined? ActiveRecord
 # config
@@ -14,25 +14,5 @@ app.config.root = File.dirname(__FILE__)
 Rails.backtrace_cleaner.remove_silencers!
 app.initialize!
 
-# routes
-app.routes.draw do
-  resources :people
-end
-
 #models
 require 'fake_app/active_record/models' if defined? ActiveRecord
-
-# controllers
-class ApplicationController < ActionController::Base;
-end
-class UsersController < ApplicationController
-  def index
-    @people = Person.fuzzy_where(age: :young)
-    render :inline => <<-ERB
-<%= @people.map(&:name).join("\n") %>
-    ERB
-  end
-end
-
-# helpers
-Object.const_set(:ApplicationHelper, Module.new)
