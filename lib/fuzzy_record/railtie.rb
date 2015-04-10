@@ -1,7 +1,8 @@
 module FuzzyRecord
   class Railtie < ::Rails::Railtie #:nodoc:
     initializer 'fuzzy_record' do |_app|
-      FuzzyRecord::Hooks.init
+      ::ActiveRecord::Base.send :include, FuzzyRecord::ActiveRecordModelExtension
+      #ActiveRecord::Base.extend(FuzzyRecord::ActiveRecordModelExtension)
     end
   end
 end

@@ -30,7 +30,7 @@ module FuzzyRecord
     # @param [Key] key
     # @return [Hash] fuzzy predicate definition
     def fuzzy_predicate(key)
-      @fuzzy_predicates ||= load_yml(predicates_file)
+      @fuzzy_predicates = load_yml(predicates_file)
       @fuzzy_predicates["#{key}"]
     end
 
