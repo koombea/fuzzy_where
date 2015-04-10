@@ -1,6 +1,7 @@
 require 'fuzzy_record/fuzzy_derivation'
 
 module FuzzyRecord
+  # Methods to extend ActiveRecord
   module ActiveRecordModelExtension
     extend ActiveSupport::Concern
 

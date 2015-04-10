@@ -19,15 +19,19 @@ module FuzzyRecord
     @config
   end
 
-  # need a Class for 3.0
+  # {FuzzyRecord} Configuration class
   class Configuration #:nodoc:
     include ActiveSupport::Configurable
 
+    # @!attribute [rw] where_method_name
+    #   @return [String] search method name definition
     config_accessor :where_method_name
+    # @!attribute [rw] predicates_file
+    #   configuration file location
     config_accessor :predicates_file
 
     # Return a fuzzy predicate definition
-    # @param [Key] key
+    # @param key [Key] predicate name
     # @return [Hash] fuzzy predicate definition
     def fuzzy_predicate(key)
       @fuzzy_predicates = load_yml(predicates_file)
@@ -36,6 +40,8 @@ module FuzzyRecord
 
     private
     # Load YAML file
+    # @param path [Object] predicates definition location
+    # @return [Hash] fuzzy predicate definitions
     def load_yml(path)
       raise ConfigError, "The configuration file is not defined." unless path
 
