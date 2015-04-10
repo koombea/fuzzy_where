@@ -53,7 +53,10 @@ describe FuzzyRecord::Configuration do
         FuzzyRecord.configure { |c| c.predicates_file = path }
       end
       it 'should fetch young definition' do
-        expect(config.fuzzy_predicate(:young)).to eq({"min" => 10, "core1" => 15, "core2" => 20, "max" => 25})
+        expect(config.fuzzy_predicate(:young)).to eq({"min"=>12, "core1"=>15, "core2"=>20, "max"=>25})
+      end
+      after do
+        FuzzyRecord.configure { |c| c.predicates_file = nil }
       end
     end
   end

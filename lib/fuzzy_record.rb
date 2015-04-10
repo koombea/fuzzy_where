@@ -12,7 +12,6 @@ rescue LoadError
 #do nothing
 end
 
-
 $stderr.puts <<-EOC unless defined?(Rails)
 warning: no framework detected.
 
@@ -25,10 +24,5 @@ EOC
 # load FuzzyRecord components
 require 'fuzzy_record/config'
 require 'fuzzy_record/exceptions'
-require 'fuzzy_record/models/configuration_methods'
-require 'fuzzy_record/hooks'
-# if not using Railtie, call `FuzzyRecord::Hooks.init` directly
-if defined? Rails
-  require 'fuzzy_record/railtie'
-  require 'fuzzy_record/engine'
-end
+require 'fuzzy_record/active_record_model_extension'
+require 'fuzzy_record/railtie' if defined?(::Rails)

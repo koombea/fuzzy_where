@@ -1,15 +1,20 @@
-young:
-  min: 10
-  core1: 15
-  core2: 20
-  max: 25
-old:
-  min: 40
-  core1: 45
-  core2: infinite
-  max: infinite
 kid:
   min: infinite
   core1: infinite
   core2: 10
   max: 13
+young:
+  min: 12
+  core1: 15
+  core2: 20
+  max: 25
+adult:
+  min: 22
+  core1: 30
+  core2: 40
+  max: 50
+old:
+  min: 48
+  core1: 55
+  core2: infinite
+  max: infinite
