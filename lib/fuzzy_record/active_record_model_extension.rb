@@ -8,6 +8,7 @@ module FuzzyRecord
     included do
 
       # Fuzzy Where
+      # @param fuzzy_conditions [Hash]
       eval <<-RUBY
         def self.#{FuzzyRecord.config.where_method_name}(fuzzy_conditions = {})
           unless fuzzy_conditions.respond_to?(:key)
@@ -22,6 +23,8 @@ module FuzzyRecord
           relation
         end
       RUBY
+
+
     end
   end
 end
