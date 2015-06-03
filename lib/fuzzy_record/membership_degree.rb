@@ -1,13 +1,12 @@
 module FuzzyRecord
-  # Class to take a column and a fuzzy predicate and return de equivalent
-  # standard query
-  class BelongingDegree
+  # Class to determine what is the calculation for a fuzzy pred and a column
+  class MembershipDegree
 
-    # @!attribute [r] query
-    #   @return [ActiveRecord_Relation] the current standard query
+    # @!attribute [r] calculation
+    #   @return [String] calculation query to be used to the given column
     attr_reader :calculation
 
-    # New FuzzyDerivation intance
+    # New MembershipDegree intance
     # @param column [String] column name
     # @param fuzzy_predicate [Hash] fuzzy predicate
     def initialize(column, fuzzy_predicate)
@@ -15,8 +14,8 @@ module FuzzyRecord
       @fuzzy_predicate = fuzzy_predicate
     end
 
-    # Take instance attributtes and return a derivated query
-    # @return [ActiveRecord_Relation] the current standard query
+    # Take instance attributtes and return a calculations for them
+    # @return [String] the calculation query to be used for the column
     def determine_calculation
       min = @fuzzy_predicate[:min]
       max = @fuzzy_predicate[:max]
@@ -41,15 +40,22 @@ module FuzzyRecord
       @calculation
     end
 
-    def self.get_select_query(table_name, relation, belonging_degrees)
-      degree = if belonging_degrees.size > 1
+    # Determine the best approach to get a final membership degree for the whole query
+    # and return the query with the select statement
+    #
+    # @param column [String] table name
+    # @param column [ActiveRecord_Relation] relation
+    # @param column [Array]  array of calculations to be made
+    # @return [ActiveRecord_Relation] final standard query
+    def self.get_select_query(table_name, relation, membership_degrees)
+      degree = if membership_degrees.size > 1
                  if ActiveRecord::Base.connection.instance_of? ActiveRecord::ConnectionAdapters::Sqlite3Adapter
-                   "MIN(#{belonging_degrees.join(',')})"
+                   "MIN(#{membership_degrees.join(',')})"
                  else
-                   "LEAST(#{belonging_degrees.join(',')})"
+                   "LEAST(#{membership_degrees.join(',')})"
                  end
                else
-                 belonging_degrees.join(',')
+                 membership_degrees.join(',')
                end
       relation.select("#{table_name}.*, (#{degree}) AS fuzzy_degree")
     end
