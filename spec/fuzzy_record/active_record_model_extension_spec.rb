@@ -60,19 +60,19 @@ if defined? ActiveRecord
       let(:olds) {[mayor_adult, old]}
 
       it "searchs People with kid age" do
-        expect(PersonFuzzy.fuzzy_where(age: :kid)).to eq kids
+        expect(PersonFuzzy.fuzzy_where(age: :kid)).to match_array kids
       end
 
       it "searchs People with young age" do
-        expect(PersonFuzzy.fuzzy_where(age: :young)).to eq youngs
+        expect(PersonFuzzy.fuzzy_where(age: :young)).to match_array youngs
       end
 
       it "searchs People with adult age" do
-        expect(PersonFuzzy.fuzzy_where(age: :adult)).to eq adults
+        expect(PersonFuzzy.fuzzy_where(age: :adult)).to match_array adults
       end
 
       it "searchs People with old age" do
-        expect(PersonFuzzy.fuzzy_where(age: :old)).to eq olds
+        expect(PersonFuzzy.fuzzy_where(age: :old)).to match_array olds
       end
 
       after do

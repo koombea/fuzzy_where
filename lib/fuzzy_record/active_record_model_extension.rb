@@ -1,4 +1,5 @@
 require 'fuzzy_record/fuzzy_derivation'
+require 'fuzzy_record/belonging_degree'
 
 module FuzzyRecord
   # Methods to extend ActiveRecord
@@ -10,21 +11,24 @@ module FuzzyRecord
       # Fuzzy Where
       # @param fuzzy_conditions [Hash]
       eval <<-RUBY
-        def self.#{FuzzyRecord.config.where_method_name}(fuzzy_conditions = {})
+        def self.#{FuzzyRecord.config.where_method_name}(fuzzy_conditions = {}, degree=0.5)
           unless fuzzy_conditions.respond_to?(:key)
             raise ArgumentError, "fuzzy_conditions must be a Hash, got " + fuzzy_conditions.inspect
           end
           relation = where(nil)
+          belonging_degrees = []
           fuzzy_conditions.each do |column, predicate|
             pred_def = FuzzyRecord.config.fuzzy_predicate(predicate)
             raise FuzzyRecord::FuzzyError, "could not find fuzzy definition" unless pred_def
             relation = FuzzyRecord::FuzzyDerivation.new(relation, column, pred_def).derivative_query
+            belonging_degrees <<  FuzzyRecord::BelongingDegree.new(column, pred_def).determine_calculation
           end
-          relation
+          relation = FuzzyRecord::BelongingDegree.get_select_query(quoted_table_name, relation, belonging_degrees)
+          relation.order('fuzzy_degree DESC')
         end
       RUBY
 
-
+      #
     end
   end
 end
