@@ -6,43 +6,6 @@ module FuzzyRecord
     #   @return [String] calculation query to be used for the given column
     attr_reader :calculation
 
-    # New MembershipDegree intance
-    # @param table [String] table name
-    # @param column [String] column name
-    # @param fuzzy_predicate [Hash] fuzzy predicate
-    def initialize(table, column, fuzzy_predicate)
-      @table = table
-      @column = column
-      @fuzzy_predicate = fuzzy_predicate
-    end
-
-    # Take instance attributtes and return a calculations for them
-    # @return [String] the calculation query to be used for the column
-    def determine_calculation
-      min = @fuzzy_predicate[:min]
-      max = @fuzzy_predicate[:max]
-
-      @calculation = if !min || min == "infinite"
-                        "CASE WHEN #{@table}.#{@column} < #{@fuzzy_predicate[:core2].to_f} THEN 1.0
-                              WHEN #{@table}.#{@column} >= #{@fuzzy_predicate[:core2].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:max].to_f} THEN (#{@fuzzy_predicate[:max].to_f}-#{@table}.#{@column})/(#{@fuzzy_predicate[:max].to_f} - #{@fuzzy_predicate[:core2].to_f})
-                              ELSE 0
-                         END"
-                      elsif !max || max == "infinite"
-                        "CASE WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:core1].to_f} THEN 1.0
-                              WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:min].to_f} AND #{@table}.#{@column} <= #{@fuzzy_predicate[:core1].to_f} THEN (#{@table}.#{@column} - #{@fuzzy_predicate[:min].to_f})/(#{@fuzzy_predicate[:core1].to_f} - #{@fuzzy_predicate[:min].to_f})
-                              ELSE 0
-                         END"
-                      else
-                        "CASE WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:core1].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:core2].to_f} THEN 1.0
-                              WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:min].to_f} AND  #{@table}.#{@column} < #{@fuzzy_predicate[:core1].to_f} THEN (#{@table}.#{@column} - #{@fuzzy_predicate[:min].to_f})/(#{@fuzzy_predicate[:core1].to_f} - #{@fuzzy_predicate[:min].to_f})
-                              WHEN #{@table}.#{@column} >= #{@fuzzy_predicate[:core2].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:max].to_f} THEN (#{@fuzzy_predicate[:max].to_f} - #{@table}.#{@column})/(#{@fuzzy_predicate[:max].to_f} - #{@fuzzy_predicate[:core2].to_f})
-                              ELSE 0
-                         END"
-                      end
-      @calculation
-    end
-
-    self
     # Determine the best approach to get a final membership degree for the whole query
     # and return the query with the select statement
     #
@@ -61,6 +24,56 @@ module FuzzyRecord
                  membership_degrees.join(',')
                end
       relation.select("#{table_name}.*, (#{degree}) AS fuzzy_degree")
+    end
+
+    # New MembershipDegree intance
+    # @param table [String] table name
+    # @param column [String] column name
+    # @param fuzzy_predicate [Hash] fuzzy predicate
+    def initialize(table, column, fuzzy_predicate)
+      @table = table
+      @column = column
+      @fuzzy_predicate = fuzzy_predicate
+    end
+
+    # Take instance attributtes and return a calculations for them
+    # @return [String] the calculation query to be used for the column
+    def membership_function
+      min = @fuzzy_predicate[:min]
+      max = @fuzzy_predicate[:max]
+
+      @calculation = if !min || min == "infinite"
+                       decrescent
+                     elsif !max || max == "infinite"
+                       increscent
+                     else
+                       unimodal
+                     end
+      @calculation
+    end
+
+    private
+
+    def decrescent
+      "CASE WHEN #{@table}.#{@column} < #{@fuzzy_predicate[:core2].to_f} THEN 1.0
+            WHEN #{@table}.#{@column} >= #{@fuzzy_predicate[:core2].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:max].to_f} THEN (#{@fuzzy_predicate[:max].to_f}-#{@table}.#{@column})/(#{@fuzzy_predicate[:max].to_f} - #{@fuzzy_predicate[:core2].to_f})
+            ELSE 0
+       END"
+    end
+
+    def increscent
+      "CASE WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:core1].to_f} THEN 1.0
+            WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:min].to_f} AND #{@table}.#{@column} <= #{@fuzzy_predicate[:core1].to_f} THEN (#{@table}.#{@column} - #{@fuzzy_predicate[:min].to_f})/(#{@fuzzy_predicate[:core1].to_f} - #{@fuzzy_predicate[:min].to_f})
+            ELSE 0
+       END"
+    end
+
+    def unimodal
+     "CASE WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:core1].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:core2].to_f} THEN 1.0
+           WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:min].to_f} AND  #{@table}.#{@column} < #{@fuzzy_predicate[:core1].to_f} THEN (#{@table}.#{@column} - #{@fuzzy_predicate[:min].to_f})/(#{@fuzzy_predicate[:core1].to_f} - #{@fuzzy_predicate[:min].to_f})
+           WHEN #{@table}.#{@column} >= #{@fuzzy_predicate[:core2].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:max].to_f} THEN (#{@fuzzy_predicate[:max].to_f} - #{@table}.#{@column})/(#{@fuzzy_predicate[:max].to_f} - #{@fuzzy_predicate[:core2].to_f})
+           ELSE 0
+      END"
     end
 
   end
