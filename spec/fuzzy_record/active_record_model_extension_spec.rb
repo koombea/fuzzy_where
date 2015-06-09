@@ -4,6 +4,7 @@ if defined? ActiveRecord
   require 'support/active_record/ar_stand_in'
   require 'support/active_record/not_there'
   require 'support/active_record/person_fuzzy'
+  require 'support/active_record/hotel_fuzzy'
   describe FuzzyRecord::ActiveRecordModelExtension do
     context "after extending ActiveRecord::Base" do
       it "works with #respond_to?" do
@@ -75,6 +76,47 @@ if defined? ActiveRecord
         expect(PersonFuzzy.fuzzy_where(age: :old)).to match_array olds
       end
 
+      after do
+        FuzzyRecord.configure { |c| c.predicates_file = nil }
+      end
+    end
+    context "calculating membership degree" do
+      let(:path) { FIXTURES_PATH.join('fuzzy_predicates.yml') }
+      before do
+        FuzzyRecord.configure { |c| c.predicates_file = path }
+      end
+      # let(:cheap){HotelFuzzy.create(name:'cheap', price: 10, distance:20)}
+      # let(:expensive){HotelFuzzy.create(name:'expensive', price: 26, distance:20)}
+      # let(:close){HotelFuzzy.create(name:'close', price: 30, distance:0.5)}
+      # let(:close_cheap){HotelFuzzy.create(name:'clse_cheap', price: 30, distance:0.5)}
+      let!(:fuzzy_close){ HotelFuzzy.create(name:'fuzzy_close', price: 24, distance:1.5) }
+      let!(:fuzzy_cheap){ HotelFuzzy.create(name:'fuzzy_cheap', price: 22, distance:2) }
+      let!(:fuzzy_close_cheap){ HotelFuzzy.create(name:'fuzzy_close_cheap', price: 22, distance:1.5) }
+
+      it "works with #respond_to?" do
+        result = HotelFuzzy.fuzzy_where(distance: :close).first
+        expect(result).to eq fuzzy_close
+        expect(result).to respond_to :fuzzy_degree
+      end
+      it "calculates the membership degree" do
+        result = HotelFuzzy.fuzzy_where(distance: :close).first
+        expect(result).to eq fuzzy_close
+        expect(result.fuzzy_degree).to eq 0.75
+      end
+      it "calculates the membership degree" do
+        result = HotelFuzzy.fuzzy_where(price: :cheap).first
+        expect(result).to eq fuzzy_cheap
+        expect(result.fuzzy_degree).to eq 0.6
+      end
+      it "calculates the membership degree" do
+        result = HotelFuzzy.fuzzy_where(price: :cheap, distance: :close)
+        expect(result).to match_array [fuzzy_close, fuzzy_cheap, fuzzy_close_cheap]
+        result.each do |r|
+          expect(r.fuzzy_degree).to eq [((3-r.distance)/(3-1)), ((25-r.price)/(25-20))].min 
+
+        end
+        #expect(result.fuzzy_degree).to eq 0.6
+      end
       after do
         FuzzyRecord.configure { |c| c.predicates_file = nil }
       end

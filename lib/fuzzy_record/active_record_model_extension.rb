@@ -20,8 +20,8 @@ module FuzzyRecord
           fuzzy_conditions.each do |column, predicate|
             pred_def = FuzzyRecord.config.fuzzy_predicate(predicate)
             raise FuzzyRecord::FuzzyError, "could not find fuzzy definition" unless pred_def
-            relation = FuzzyRecord::FuzzyDerivation.new(relation, column, pred_def).derivative_query
-            membership_degrees <<  FuzzyRecord::MembershipDegree.new(column, pred_def).determine_calculation
+            relation = FuzzyRecord::FuzzyDerivation.new(relation, quoted_table_name, column, pred_def).derivative_query
+            membership_degrees <<  FuzzyRecord::MembershipDegree.new(quoted_table_name, column, pred_def).determine_calculation
           end
           relation = FuzzyRecord::MembershipDegree.get_select_query(quoted_table_name, relation, membership_degrees)
           relation.order('fuzzy_degree DESC')

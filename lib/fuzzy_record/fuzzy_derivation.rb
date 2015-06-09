@@ -4,14 +4,16 @@ module FuzzyRecord
   class FuzzyDerivation
 
     # @!attribute [r] query
-    #   @return [ActiveRecord_Relation] the current standard query    
+    #   @return [ActiveRecord_Relation] the current standard query
     attr_reader :query
 
     # New FuzzyDerivation intance
     # @param query [ActiveRecord_Relation] query tu append
+    # @param table [String] table name
     # @param column [String] column name
     # @param fuzzy_predicate [Hash] fuzzy predicate
-    def initialize(query, column, fuzzy_predicate)
+    def initialize(query, table, column, fuzzy_predicate)
+      @table = table
       @query = query
       @column = column
       @fuzzy_predicate = fuzzy_predicate
@@ -23,11 +25,11 @@ module FuzzyRecord
       min = @fuzzy_predicate[:min]
       max = @fuzzy_predicate[:max]
 
-      if min && min != "infinite"
-        @query= @query.where("#{@column} >= ?", min)
+      if min && min != 'infinite'.freeze
+        @query= @query.where("#{@table}.#{@column} >= ?", min)
       end
-      if max && max != "infinite"
-        @query = @query.where("#{@column} <= ?", max)
+      if max && max != 'infinite'.freeze
+        @query = @query.where("#{@table}.#{@column} <= ?", max)
       end
       @query
     end
