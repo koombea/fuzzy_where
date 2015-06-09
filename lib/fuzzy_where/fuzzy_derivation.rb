@@ -1,4 +1,4 @@
-module FuzzyRecord
+module FuzzyWhere
   # Class to take a column and a fuzzy predicate and return de equivalent
   # standard query
   class FuzzyDerivation

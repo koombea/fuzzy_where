@@ -1,4 +1,4 @@
-require 'fuzzy_record'
+require 'fuzzy_where'
 require 'database_cleaner'
 
 require 'bundler/setup'

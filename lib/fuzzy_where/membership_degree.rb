@@ -1,4 +1,4 @@
-module FuzzyRecord
+module FuzzyWhere
   # Class to determine what is the membership calculation of a given column
   class MembershipDegree
 

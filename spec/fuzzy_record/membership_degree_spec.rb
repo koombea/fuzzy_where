@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 if defined? ActiveRecord
-  describe FuzzyRecord::MembershipDegree do
+  describe FuzzyWhere::MembershipDegree do
     describe "#determine_calculation" do
       skip "Pending test"
     end

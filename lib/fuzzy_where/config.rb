@@ -5,21 +5,21 @@ require 'active_support/configurable'
 
 #require 'rails'
 
-module FuzzyRecord
-  # Configures global settings for FuzzyRecord
-  #   FuzzyRecord.configure do |config|
+module FuzzyWhere
+  # Configures global settings for FuzzyWhere
+  #   FuzzyWhere.configure do |config|
   #     config.where_method_name = :fuzzy_where
   #   end
   def self.configure(&block)
-    yield @config ||= FuzzyRecord::Configuration.new
+    yield @config ||= FuzzyWhere::Configuration.new
   end
 
-  # Global settings for FuzzyRecord
+  # Global settings for FuzzyWhere
   def self.config
     @config
   end
 
-  # {FuzzyRecord} Configuration class
+  # {FuzzyWhere} Configuration class
   class Configuration #:nodoc:
     include ActiveSupport::Configurable
 

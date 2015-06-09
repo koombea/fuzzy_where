@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fuzzy_record/version'
+require 'fuzzy_where/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'fuzzy_record'
-  spec.version       = FuzzyRecord::VERSION
+  spec.name          = 'fuzzy_where'
+  spec.version       = FuzzyWhere::VERSION
   spec.authors       = ['Gustavo Bazan']
   spec.email         = ['gustavo.bazan@koombea.com']
 

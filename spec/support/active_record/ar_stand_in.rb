@@ -1,4 +1,4 @@
 class ARStandIn < ActiveRecord::Base;
   self.abstract_class = true
-  include FuzzyRecord::ActiveRecordModelExtension
+  include FuzzyWhere::ActiveRecordModelExtension
 end

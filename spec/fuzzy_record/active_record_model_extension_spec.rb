@@ -5,7 +5,7 @@ if defined? ActiveRecord
   require 'support/active_record/not_there'
   require 'support/active_record/person_fuzzy'
   require 'support/active_record/hotel_fuzzy'
-  describe FuzzyRecord::ActiveRecordModelExtension do
+  describe FuzzyWhere::ActiveRecordModelExtension do
     context "after extending ActiveRecord::Base" do
       it "works with #respond_to?" do
         expect(ARStandIn).to respond_to :fuzzy_where
@@ -44,7 +44,7 @@ if defined? ActiveRecord
     context "when finding models based on fuzzy predicates" do
       let(:path) { FIXTURES_PATH.join('fuzzy_predicates.yml') }
       before do
-        FuzzyRecord.configure { |c| c.predicates_file = path }
+        FuzzyWhere.configure { |c| c.predicates_file = path }
       end
       let(:kid){PersonFuzzy.create(name: "Jhon Doe", age: 9)}
       let(:not_so_kid){PersonFuzzy.create(name: "Jhon Doe", age: 12)}
@@ -77,13 +77,13 @@ if defined? ActiveRecord
       end
 
       after do
-        FuzzyRecord.configure { |c| c.predicates_file = nil }
+        FuzzyWhere.configure { |c| c.predicates_file = nil }
       end
     end
     context "calculating membership degree" do
       let(:path) { FIXTURES_PATH.join('fuzzy_predicates.yml') }
       before do
-        FuzzyRecord.configure { |c| c.predicates_file = path }
+        FuzzyWhere.configure { |c| c.predicates_file = path }
       end
       # let(:cheap){HotelFuzzy.create(name:'cheap', price: 10, distance:20)}
       # let(:expensive){HotelFuzzy.create(name:'expensive', price: 26, distance:20)}
@@ -112,13 +112,13 @@ if defined? ActiveRecord
         result = HotelFuzzy.fuzzy_where(price: :cheap, distance: :close)
         expect(result).to match_array [fuzzy_close, fuzzy_cheap, fuzzy_close_cheap]
         result.each do |r|
-          expect(r.fuzzy_degree).to eq [((3-r.distance)/(3-1)), ((25-r.price)/(25-20))].min 
+          expect(r.fuzzy_degree).to eq [((3-r.distance)/(3-1)), ((25-r.price)/(25-20))].min
 
         end
         #expect(result.fuzzy_degree).to eq 0.6
       end
       after do
-        FuzzyRecord.configure { |c| c.predicates_file = nil }
+        FuzzyWhere.configure { |c| c.predicates_file = nil }
       end
     end
   end

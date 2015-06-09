@@ -1,4 +1,4 @@
-# FuzzyRecord
+# FuzzyWhere
 
 An `ActiveRecord` implementation of SQLf. This is a work in progress.
 
@@ -7,7 +7,7 @@ An `ActiveRecord` implementation of SQLf. This is a work in progress.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'fuzzy_record'
+gem 'fuzzy_where'
 ```
 
 And then execute:
@@ -16,11 +16,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install fuzzy_record
+    $ gem install fuzzy_where
 
 Generate configuration files:
 
-    $ rails g fuzzy_record:config
+    $ rails g fuzzy_where:config
 
 ## Usage
 
