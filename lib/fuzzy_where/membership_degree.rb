@@ -42,9 +42,9 @@ module FuzzyWhere
       min = @fuzzy_predicate[:min]
       max = @fuzzy_predicate[:max]
 
-      @calculation = if !min || min == "infinite"
+      @calculation = if !min || min == 'infinite'.freeze
                        decreasing
-                     elsif !max || max == "infinite"
+                     elsif !max || max == 'infinite'.freeze
                        increasing
                      else
                        unimodal
