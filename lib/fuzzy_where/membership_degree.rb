@@ -43,9 +43,9 @@ module FuzzyWhere
       max = @fuzzy_predicate[:max]
 
       @calculation = if !min || min == "infinite"
-                       decrescent
+                       decreasing
                      elsif !max || max == "infinite"
-                       increscent
+                       increasing
                      else
                        unimodal
                      end
@@ -54,14 +54,14 @@ module FuzzyWhere
 
     private
 
-    def decrescent
+    def decreasing
       "CASE WHEN #{@table}.#{@column} < #{@fuzzy_predicate[:core2].to_f} THEN 1.0
             WHEN #{@table}.#{@column} >= #{@fuzzy_predicate[:core2].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:max].to_f} THEN (#{@fuzzy_predicate[:max].to_f}-#{@table}.#{@column})/(#{@fuzzy_predicate[:max].to_f} - #{@fuzzy_predicate[:core2].to_f})
             ELSE 0
        END"
     end
 
-    def increscent
+    def increasing
       "CASE WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:core1].to_f} THEN 1.0
             WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:min].to_f} AND #{@table}.#{@column} <= #{@fuzzy_predicate[:core1].to_f} THEN (#{@table}.#{@column} - #{@fuzzy_predicate[:min].to_f})/(#{@fuzzy_predicate[:core1].to_f} - #{@fuzzy_predicate[:min].to_f})
             ELSE 0
