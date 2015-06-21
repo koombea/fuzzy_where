@@ -26,10 +26,10 @@ module FuzzyWhere
       max = @fuzzy_predicate[:max]
 
       if min && min != 'infinite'.freeze
-        @query= @query.where("#{@table}.#{@column} >= ?", min)
+        @query= @query.where("#{@table}.#{@column} > ?", min)
       end
       if max && max != 'infinite'.freeze
-        @query = @query.where("#{@table}.#{@column} <= ?", max)
+        @query = @query.where("#{@table}.#{@column} < ?", max)
       end
       @query
     end
