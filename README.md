@@ -1,7 +1,7 @@
 # FuzzyWhere
 
 An `ActiveRecord` implementation of [SQLf](http://en.wikipedia.org/wiki/SQLf).
-At this moment it allows you to load fuzzy definitions from a yaml file and use then as where conditions.
+At this moment it allows you to load fuzzy definitions from a yaml file and use them as where conditions.
 This is a work in progress and plan to add more ways to create fuzzy predicates and is expected a full implementation of SQLf.
 
 ## Installation
