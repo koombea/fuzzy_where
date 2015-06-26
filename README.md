@@ -26,9 +26,24 @@ Generate configuration files:
 
 ## Usage
 
-Add your definitions to `config/fuzzy_predicates.yml`.
-Example:
+Fuzzy predicates are stored in `config/fuzzy_predicates.yml`. You can use a generator to populate the file.
+
+```console
+ rails g fuzzy_where:predicate PREDICATE min core1 core2 max
+```
+
+Replace PREDICATE with the name you wish to use for you linguistic expression and set the values for the trapezoid function.
+
+### Example:
+
+```console
+ rails g fuzzy_where:predicate young 10 15 20 25
+```
+
+Will produce:
+
 ```yaml
+# config/fuzzy_predicates.yml
 young:
   min: 10
   core1: 15
@@ -37,16 +52,10 @@ young:
 ```
 
 Then you can use your definitions as follow:
+
 ```ruby
-    Person.fuzzy_where(age: :young)
+Person.fuzzy_where(age: :young)
 ```
-
-## Development
-
-To install this gem onto your local machine, run `bundle exec rake install`.
-To release a new version, update the version number in `version.rb`,
-and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags,
-and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 

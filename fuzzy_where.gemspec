@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'SQLf'
   spec.description   = 'SQLf'
-  spec.homepage      = 'https://github.com/koombea/fuzzy-record'
+  spec.homepage      = 'https://github.com/koombea/fuzzy_where'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

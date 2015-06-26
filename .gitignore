@@ -1,5 +1,5 @@
 /.bundle/
-/.yardoc
+/.yardoc/
 /Gemfile.lock
 /_yardoc/
 /coverage/
@@ -8,6 +8,7 @@
 /spec/reports/
 /tmp/
 spec/fake_app/log/
+spec/tmp/
 
 # Idea
 .idea

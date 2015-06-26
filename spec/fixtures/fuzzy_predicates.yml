@@ -3,7 +3,7 @@ kid:
   min: infinite
   core1: infinite
   core2: 10
-  max: 13
+  max: 14
 young:
   min: 12
   core1: 15

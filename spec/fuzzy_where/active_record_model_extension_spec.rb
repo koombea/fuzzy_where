@@ -47,7 +47,7 @@ if defined? ActiveRecord
         FuzzyWhere.configure { |c| c.predicates_file = path }
       end
       let(:kid){PersonFuzzy.create(name: "Jhon Doe", age: 9)}
-      let(:not_so_kid){PersonFuzzy.create(name: "Jhon Doe", age: 12)}
+      let(:not_so_kid){PersonFuzzy.create(name: "Jhon Doe", age: 13)}
       let(:teenage){PersonFuzzy.create(name: "Jhon Doe", age: 14)}
       let(:young){PersonFuzzy.create(name: "Jhon Doe", age: 19)}
       let(:not_so_young){PersonFuzzy.create(name: "Jhon Doe", age: 23)}
@@ -60,19 +60,19 @@ if defined? ActiveRecord
       let(:adults) {[not_so_young, adult, mayor_adult]}
       let(:olds) {[mayor_adult, old]}
 
-      it "searchs People with kid age" do
+      it "searches People with kid age" do
         expect(PersonFuzzy.fuzzy_where(age: :kid)).to match_array kids
       end
 
-      it "searchs People with young age" do
+      it "searches People with young age" do
         expect(PersonFuzzy.fuzzy_where(age: :young)).to match_array youngs
       end
 
-      it "searchs People with adult age" do
+      it "searches People with adult age" do
         expect(PersonFuzzy.fuzzy_where(age: :adult)).to match_array adults
       end
 
-      it "searchs People with old age" do
+      it "searches People with old age" do
         expect(PersonFuzzy.fuzzy_where(age: :old)).to match_array olds
       end
 
@@ -85,10 +85,6 @@ if defined? ActiveRecord
       before do
         FuzzyWhere.configure { |c| c.predicates_file = path }
       end
-      # let(:cheap){HotelFuzzy.create(name:'cheap', price: 10, distance:20)}
-      # let(:expensive){HotelFuzzy.create(name:'expensive', price: 26, distance:20)}
-      # let(:close){HotelFuzzy.create(name:'close', price: 30, distance:0.5)}
-      # let(:close_cheap){HotelFuzzy.create(name:'clse_cheap', price: 30, distance:0.5)}
       let!(:fuzzy_close){ HotelFuzzy.create(name:'fuzzy_close', price: 24, distance:1.5) }
       let!(:fuzzy_cheap){ HotelFuzzy.create(name:'fuzzy_cheap', price: 22, distance:2) }
       let!(:fuzzy_close_cheap){ HotelFuzzy.create(name:'fuzzy_close_cheap', price: 22, distance:1.5) }

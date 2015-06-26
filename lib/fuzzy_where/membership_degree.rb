@@ -9,9 +9,9 @@ module FuzzyWhere
     # Determine the best approach to get a final membership degree for the whole query
     # and return the query with the select statement
     #
-    # @param column [String] table name
-    # @param column [ActiveRecord_Relation] relation
-    # @param column [Array]  array of calculations to be made
+    # @param table_name [String] table name
+    # @param relation [ActiveRecord_Relation] relation
+    # @param membership_degrees [Array]  array of calculations to be made
     # @return [ActiveRecord_Relation] final standard query
     def self.get_select_query(table_name, relation, membership_degrees)
       degree = if membership_degrees.size > 1
@@ -54,6 +54,8 @@ module FuzzyWhere
 
     private
 
+    # Decreasing function calculation
+    # @return [String] condition representation for membership calculation
     def decreasing
       "CASE WHEN #{@table}.#{@column} < #{@fuzzy_predicate[:core2].to_f} THEN 1.0
             WHEN #{@table}.#{@column} >= #{@fuzzy_predicate[:core2].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:max].to_f} THEN (#{@fuzzy_predicate[:max].to_f}-#{@table}.#{@column})/(#{@fuzzy_predicate[:max].to_f} - #{@fuzzy_predicate[:core2].to_f})
@@ -61,6 +63,8 @@ module FuzzyWhere
        END"
     end
 
+    # Incresing function calculation
+    # @return [String] condition representation for membership calculation
     def increasing
       "CASE WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:core1].to_f} THEN 1.0
             WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:min].to_f} AND #{@table}.#{@column} <= #{@fuzzy_predicate[:core1].to_f} THEN (#{@table}.#{@column} - #{@fuzzy_predicate[:min].to_f})/(#{@fuzzy_predicate[:core1].to_f} - #{@fuzzy_predicate[:min].to_f})
@@ -68,6 +72,8 @@ module FuzzyWhere
        END"
     end
 
+    # Unimodal function calculation
+    # @return [String] condition representation for membership calculation
     def unimodal
      "CASE WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:core1].to_f} AND #{@table}.#{@column} < #{@fuzzy_predicate[:core2].to_f} THEN 1.0
            WHEN #{@table}.#{@column} > #{@fuzzy_predicate[:min].to_f} AND  #{@table}.#{@column} <= #{@fuzzy_predicate[:core1].to_f} THEN (#{@table}.#{@column} - #{@fuzzy_predicate[:min].to_f})/(#{@fuzzy_predicate[:core1].to_f} - #{@fuzzy_predicate[:min].to_f})
