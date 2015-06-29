@@ -2,19 +2,22 @@
 
 * enhancements
     * add fuzzy predicate generator
+    * add configuration for membership degree column name
+    * improve classes design for ActiveRecord_Relation construction
+    * code style improvements
 
 ### 0.1.4 - 2015-06-21
 
 * bug fixes
     * Fiz query derivation
-    
+
 ### 0.1.3 - 2015-06-09
 
 * enhancements
     * rename methods to be concise with fuzzy set theory
 * bug fixes
     * fix membership degree calculation
-    
+
 ### 0.1.2 - 2015-06-09
 
 * bug fixes

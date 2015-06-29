@@ -1,8 +1,9 @@
+# SQLf implementation for ActiveRecord
 module FuzzyWhere
   module Generators #:nodoc
-    class ConfigGenerator < Rails::Generators::Base #:nodoc
+    # Generate gem configuration files
+    class ConfigGenerator < Rails::Generators::Base
       source_root File.expand_path(File.join(File.dirname(__FILE__), 'templates'))
-
 
       desc <<DESC
 Description:

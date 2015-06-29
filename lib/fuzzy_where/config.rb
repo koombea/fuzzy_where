@@ -3,14 +3,13 @@ require 'active_support/core_ext/hash'
 require 'active_support/hash_with_indifferent_access'
 require 'active_support/configurable'
 
-#require 'rails'
-
+# SQLf implementation for ActiveRecord
 module FuzzyWhere
   # Configures global settings for FuzzyWhere
   #   FuzzyWhere.configure do |config|
   #     config.where_method_name = :fuzzy_where
   #   end
-  def self.configure(&block)
+  def self.configure(&_block)
     yield @config ||= FuzzyWhere::Configuration.new
   end
 
@@ -26,6 +25,9 @@ module FuzzyWhere
     # @!attribute [rw] where_method_name
     #   @return [String] search method name definition
     config_accessor :where_method_name
+    # @!attribute [rw] membership_degree_column_name
+    #   @return [String] membership degree column name definition
+    config_accessor :membership_degree_column_name
     # @!attribute [rw] predicates_file
     #   configuration file location
     config_accessor :predicates_file
@@ -39,28 +41,28 @@ module FuzzyWhere
     end
 
     private
+
     # Load YAML file
     # @param path [Object] predicates definition location
     # @return [Hash] fuzzy predicate definitions
     def load_yml(path)
-      raise ConfigError, "The configuration file is not defined." unless path
+      fail ConfigError, 'The configuration file is not defined.' unless path
 
-      path = path.kind_of?(Pathname) ? path : Pathname.new(path)
+      path = path.is_a?(Pathname) ? path : Pathname.new(path)
 
       if !path.exist?
-        raise ConfigError, "The configuration file #{@path} was not found."
+        fail ConfigError, "The configuration file #{@path} was not found."
       elsif !path.file?
-        raise ConfigError, "The configuration file #{@path} is not a file."
+        fail ConfigError, "The configuration file #{@path} is not a file."
       elsif !path.readable?
-        raise ConfigError, "The configuration file #{@path} is not readable."
+        fail ConfigError, "The configuration file #{@path} is not readable."
       end
       HashWithIndifferentAccess.new(YAML.load_file(path))
     end
   end
 
-
   configure do |config|
     config.where_method_name = :fuzzy_where
-    #config.predicates_file = Rails.root.join('config', 'fuzzy_predicates.yml') if defined? Rails
+    config.membership_degree_column_name = :membership_degree
   end
 end

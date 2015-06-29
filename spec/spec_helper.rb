@@ -46,7 +46,7 @@ RSpec.configure do |config|
   #   - http://myronmars.to/n/dev-blog/2012/06/rspecs-new-expectation-syntax
   #   - http://teaisaweso.me/blog/2013/05/27/rspecs-new-message-expectation-syntax/
   #   - http://myronmars.to/n/dev-blog/2014/05/notable-changes-in-rspec-3#new__config_option_to_disable_rspeccore_monkey_patching
-  #config.disable_monkey_patching!
+  # config.disable_monkey_patching!
 
   # This setting enables warnings. It's recommended, but in some cases may
   # be too noisy due to issues in dependencies.
@@ -56,10 +56,10 @@ RSpec.configure do |config|
   # file, and it's useful to allow more verbose output when running an
   # individual spec file.
   # if config.files_to_run.one?
-    # Use the documentation formatter for detailed output,
-    # unless a formatter has already been configured
-    # (e.g. via a command-line flag).
-    # config.default_formatter = 'doc'
+  #   Use the documentation formatter for detailed output,
+  #   unless a formatter has already been configured
+  #   (e.g. via a command-line flag).
+  #   config.default_formatter = 'doc'
   # end
 
   # Print the 10 slowest examples and example groups at the
@@ -89,5 +89,4 @@ RSpec.configure do |config|
       example.run
     end
   end
-
 end

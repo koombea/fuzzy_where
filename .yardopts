@@ -1,6 +1,7 @@
 --protected
 --no-private
 --embed-mixin ClassMethods
+--markup markdown
 -
 README.md
 CHANGELOG.md

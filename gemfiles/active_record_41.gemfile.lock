@@ -93,6 +93,3 @@ DEPENDENCIES
   rspec-rails (~> 3.2.0)
   sqlite3
   yard (~> 0.8.7, >= 0.8.0)
-
-BUNDLED WITH
-   1.10.3

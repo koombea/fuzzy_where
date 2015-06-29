@@ -1,3 +1,4 @@
+# SQLf implementation for ActiveRecord
 module FuzzyWhere
   # Standar FuzzyWhere error
   class FuzzyError < StandardError; end

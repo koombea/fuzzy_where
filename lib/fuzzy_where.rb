@@ -2,14 +2,13 @@ require 'fuzzy_where/version'
 
 # SQLf implementation for ActiveRecord
 module FuzzyWhere
-
 end
 
 # load Rails/Railtie
 begin
   require 'rails'
 rescue LoadError
-#do nothing
+  # do nothing
 end
 
 $stderr.puts <<-EOC unless defined?(Rails)

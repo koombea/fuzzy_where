@@ -1,8 +1,9 @@
+# SQLf implementation for ActiveRecord
 module FuzzyWhere
   module Generators #:nodoc
-    class PredicateGenerator < Rails::Generators::NamedBase #:nodoc
-      argument :attributes, type: :array, default: [], banner: "1 4 infinite infinite"
-
+    # Generate a new fuzzy predicate
+    class PredicateGenerator < Rails::Generators::NamedBase
+      argument :attributes, type: :array, default: [], banner: '1 4 infinite infinite'
 
       desc <<DESC
 Description:
@@ -11,7 +12,6 @@ DESC
       # Add Fuzzy predicate
       def add_fuzzy_predicate
         return if attributes.empty?
-        puts "#{attributes[0].inspect}"
         append_to_file 'config/fuzzy_predicates.yml', predicate_content(name, attributes)
       end
 

@@ -15,7 +15,7 @@ describe FuzzyWhere::Generators::PredicateGenerator, type: :generator do
     run_generator
   end
 
-  it "adds fuzzy predicate" do
+  it 'adds fuzzy predicate' do
     assert_file 'config/fuzzy_predicates.yml', /test:/
   end
 end

@@ -1,3 +1,4 @@
+# SQLf implementation for ActiveRecord
 module FuzzyWhere
   class Railtie < ::Rails::Railtie #:nodoc:
     initializer 'fuzzy_where' do |_app|

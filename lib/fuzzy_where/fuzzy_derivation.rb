@@ -1,8 +1,8 @@
+# SQLf implementation for ActiveRecord
 module FuzzyWhere
-  # Class to take a column and a fuzzy predicate and return de equivalent
+  # Class to take a column and a fuzzy predicate and return the equivalent
   # standard query
   class FuzzyDerivation
-
     # @!attribute [r] query
     #   @return [ActiveRecord_Relation] the current standard query
     attr_reader :query
@@ -21,17 +21,23 @@ module FuzzyWhere
 
     # Take instance attributtes and return a derivated query
     # @return [ActiveRecord_Relation] the current standard query
-    def derivative_query
+    def derivative_condition
       min = @fuzzy_predicate[:min]
       max = @fuzzy_predicate[:max]
 
-      if min && min != 'infinite'.freeze
-        @query= @query.where("#{@table}.#{@column} > ?", min)
-      end
-      if max && max != 'infinite'.freeze
-        @query = @query.where("#{@table}.#{@column} < ?", max)
-      end
+      increasing_conditions(min) if min && min != 'infinite'.freeze
+      decreasing_conditions(max) if max && max != 'infinite'.freeze
       @query
+    end
+
+    private
+
+    def increasing_conditions(min)
+      @query = @query.where("#{@table}.#{@column} > ?", min)
+    end
+
+    def decreasing_conditions(max)
+      @query = @query.where("#{@table}.#{@column} < ?", max)
     end
   end
 end

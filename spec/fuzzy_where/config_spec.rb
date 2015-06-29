@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe FuzzyWhere::Configuration do
-  subject (:config) { FuzzyWhere.config }
+  subject(:config) { FuzzyWhere.config }
 
   describe 'where_method_name' do
     context 'by default' do
@@ -49,11 +49,12 @@ describe FuzzyWhere::Configuration do
     end
     context 'with predicates_file' do
       let(:path) { FIXTURES_PATH.join('fuzzy_predicates.yml') }
+      let(:young_definition) { { 'min' => 12, 'core1' => 15, 'core2' => 20, 'max' => 25 } }
       before do
         FuzzyWhere.configure { |c| c.predicates_file = path }
       end
       it 'should fetch young definition' do
-        expect(config.fuzzy_predicate(:young)).to eq({"min"=>12, "core1"=>15, "core2"=>20, "max"=>25})
+        expect(config.fuzzy_predicate(:young)).to eq(young_definition)
       end
       after do
         FuzzyWhere.configure { |c| c.predicates_file = nil }
