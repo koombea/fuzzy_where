@@ -24,7 +24,7 @@ module FuzzyWhere
 
     # New FuzzyRelationBuilder intance
     # @param table [String] table name
-    # @param relation [ActiveRecord_Relation] query tu append
+    # @param relation [ActiveRecord_Relation] query to append
     # @param conditions [Hash] fuzzy conditions
     def initialize(table, relation, conditions)
       @table = table

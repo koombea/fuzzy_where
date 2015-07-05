@@ -8,7 +8,7 @@ module FuzzyWhere
     attr_reader :query
 
     # New FuzzyDerivation intance
-    # @param query [ActiveRecord_Relation] query tu append
+    # @param query [ActiveRecord_Relation] query to append
     # @param table [String] table name
     # @param column [String] column name
     # @param fuzzy_predicate [Hash] fuzzy predicate
