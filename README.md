@@ -1,8 +1,8 @@
 # FuzzyWhere
 
 An `ActiveRecord` implementation of [SQLf](http://en.wikipedia.org/wiki/SQLf).
-At this moment it allows you to load fuzzy definitions from a yaml file and use them as where conditions.
-This is a work in progress and plan to add more ways to create fuzzy predicates and is expected a full implementation of SQLf.
+At this moment it allows you to load fuzzy definitions from a yaml file and use
+them as where conditions. More features from SQLf will be added to this gem.
 
 ## Installation
 
@@ -29,7 +29,7 @@ Generate configuration files:
 Fuzzy predicates are stored in `config/fuzzy_predicates.yml`. You can use a generator to populate the file.
 
 ```console
- rails g fuzzy_where:predicate PREDICATE min core1 core2 max
+rails g fuzzy_where:predicate PREDICATE min core1 core2 max
 ```
 
 Replace PREDICATE with the name you wish to use for you linguistic expression and set the values for the trapezoid function.
@@ -37,7 +37,7 @@ Replace PREDICATE with the name you wish to use for you linguistic expression an
 ### Example:
 
 ```console
- rails g fuzzy_where:predicate young 10 15 20 25
+rails g fuzzy_where:predicate young 10 15 20 25
 ```
 
 Will produce:
@@ -59,7 +59,7 @@ Person.fuzzy_where(age: :young)
 
 ## Contributing
 
-1. Fork it ( https://github.com/koombea/fuzzy-record/fork )
+1. Fork it ( https://github.com/koombea/fuzzy_where/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
