@@ -2,7 +2,7 @@
 
 An `ActiveRecord` implementation of [SQLf](http://en.wikipedia.org/wiki/SQLf).
 At this moment it allows you to load fuzzy definitions from a yaml file and use
-them as where conditions. More features from SQLf will be added to this gem.
+them as where conditions. More features from SQLf will be added to this gem in future iterations.
 
 ## Installation
 
@@ -14,22 +14,28 @@ gem 'fuzzy_where'
 
 And then execute:
 
-    $ bundle
+```console
+bundle
+```
 
 Or install it yourself as:
 
-    $ gem install fuzzy_where
+```console
+gem install fuzzy_where
+```
 
-Generate configuration files:
+Finally generate the configuration files:
 
-    $ rails g fuzzy_where:config
+```console
+rails g fuzzy_where:config
+```
 
 ## Usage
 
-Fuzzy predicates are stored in `config/fuzzy_predicates.yml`. You can use a generator to populate the file.
+Fuzzy predicates are stored in `config/fuzzy_predicates.yml`. You can use a generator to populate this file.
 
 ```console
-rails g fuzzy_where:predicate PREDICATE min core1 core2 max
+rails generate fuzzy_where:predicate PREDICATE min core1 core2 max
 ```
 
 Replace PREDICATE with the name you wish to use for you linguistic expression and set the values for the trapezoid function.
@@ -37,7 +43,7 @@ Replace PREDICATE with the name you wish to use for you linguistic expression an
 ### Example:
 
 ```console
-rails g fuzzy_where:predicate young 10 15 20 25
+rails generate fuzzy_where:predicate young 10 15 20 25
 ```
 
 Will produce:
@@ -51,7 +57,7 @@ young:
   max: 25
 ```
 
-Then you can use your definitions as follow:
+Then you can use your definitions as follows:
 
 ```ruby
 Person.fuzzy_where(age: :young)
