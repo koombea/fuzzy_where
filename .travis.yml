@@ -1,3 +1,9 @@
 language: ruby
 rvm:
-  - 2.2.0
+  - 2.1
+  - 2.2.2
+  - ruby-head
+gemfile:
+  - gemfiles/active_record_40.gemfile
+  - gemfiles/active_record_41.gemfile
+  - gemfiles/active_record_42.gemfile

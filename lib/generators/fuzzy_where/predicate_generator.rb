@@ -2,7 +2,7 @@
 module FuzzyWhere
   module Generators #:nodoc
     # Generate a new fuzzy predicate
-    class PredicateGenerator < Rails::Generators::NamedBase
+    class PredicateGenerator < ::Rails::Generators::NamedBase
       argument :attributes, type: :array, default: [], banner: '1 4 infinite infinite'
 
       desc <<DESC

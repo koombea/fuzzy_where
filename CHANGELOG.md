@@ -9,7 +9,7 @@
 ### 0.1.4 - 2015-06-21
 
 * bug fixes
-    * Fiz query derivation
+    * Fix query derivation
 
 ### 0.1.3 - 2015-06-09
 
