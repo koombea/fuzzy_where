@@ -1,3 +1,6 @@
+### master
+* Travis and code climate integrations
+
 ### 0.5.0
 
 * enhancements
