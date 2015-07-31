@@ -1,7 +1,7 @@
 ### master
 * Travis and code climate integrations
 
-### 0.5.0
+### 0.5.0 - 2015-07-05
 
 * enhancements
     * add fuzzy predicate generator
