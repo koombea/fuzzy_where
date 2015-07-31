@@ -9,6 +9,7 @@
 /tmp/
 spec/fake_app/log/
 spec/tmp/
+gemfiles/*.lock
 
 # Idea
 .idea
