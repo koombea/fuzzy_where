@@ -17,7 +17,6 @@ namespace :spec do
     active_record_40
     active_record_41
     active_record_42
-    active_record_edge
   )
 
   mappers.each do |gemfile|
