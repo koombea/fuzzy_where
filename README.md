@@ -1,4 +1,6 @@
 # FuzzyWhere
+[![Build Status](https://travis-ci.org/koombea/fuzzy_where.svg?branch=master)](https://travis-ci.org/koombea/fuzzy_where)
+[![Code Climate](https://codeclimate.com/github/koombea/fuzzy_where/badges/gpa.svg)](https://codeclimate.com/github/koombea/fuzzy_where)
 
 An `ActiveRecord` implementation of [SQLf](http://en.wikipedia.org/wiki/SQLf).
 At this moment it allows you to load fuzzy definitions from a yaml file and use

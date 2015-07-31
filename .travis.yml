@@ -3,7 +3,19 @@ rvm:
   - 2.1
   - 2.2.2
   - ruby-head
+
 gemfile:
   - gemfiles/active_record_40.gemfile
   - gemfiles/active_record_41.gemfile
   - gemfiles/active_record_42.gemfile
+
+sudo: false
+
+script: 'bundle exec rake spec'
+
+cache: bundler
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+  fast_finish: true
