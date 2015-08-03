@@ -5,7 +5,7 @@
 
 An `ActiveRecord` implementation of [SQLf](http://en.wikipedia.org/wiki/SQLf).
 At this moment it allows you to load fuzzy definitions from a yaml file and use
-them as where conditions. More features from SQLf will be added to this gem in future iterations.
+them as `WHERE` conditions. More features from SQLf will be added to this gem in future iterations.
 
 ## Installation
 

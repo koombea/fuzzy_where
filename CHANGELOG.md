@@ -1,5 +1,5 @@
 ### master
-* Travis and code climate integrations
+* Travis, coveralls and code climate integrations
 
 ### 0.5.0 - 2015-07-05
 
