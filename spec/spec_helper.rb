@@ -1,10 +1,11 @@
+require 'coveralls'
+Coveralls.wear!
+
 require 'fuzzy_where'
 require 'database_cleaner'
-require 'codeclimate-test-reporter'
 
 require 'bundler/setup'
 Bundler.require
-CodeClimate::TestReporter.start
 
 FIXTURES_PATH = Pathname.new(File.expand_path('../fixtures/', __FILE__))
 if defined? ActiveRecord
