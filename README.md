@@ -1,4 +1,5 @@
 # FuzzyWhere
+[![Gem Version](https://badge.fury.io/rb/fuzzy_where.svg)](http://badge.fury.io/rb/fuzzy_where)
 [![Build Status](https://travis-ci.org/koombea/fuzzy_where.svg?branch=master)](https://travis-ci.org/koombea/fuzzy_where)
 [![Code Climate](https://codeclimate.com/github/koombea/fuzzy_where/badges/gpa.svg)](https://codeclimate.com/github/koombea/fuzzy_where)
 [![Coverage Status](https://coveralls.io/repos/koombea/fuzzy_where/badge.svg?branch=coveralls&service=github)](https://coveralls.io/github/koombea/fuzzy_where)
@@ -30,7 +31,7 @@ gem install fuzzy_where
 Finally generate the configuration files:
 
 ```console
-rails g fuzzy_where:config
+rails generate fuzzy_where:config
 ```
 
 ## Usage
