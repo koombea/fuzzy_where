@@ -3,6 +3,8 @@ rvm:
   - 2.1
   - 2.2.2
   - ruby-head
+  - jruby
+  - jruby-head
 
 gemfile:
   - gemfiles/active_record_40.gemfile
@@ -18,4 +20,5 @@ cache: bundler
 matrix:
   allow_failures:
     - rvm: ruby-head
+    - rvm: jruby-head
   fast_finish: true
