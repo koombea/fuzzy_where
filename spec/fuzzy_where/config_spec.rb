@@ -83,17 +83,5 @@ describe FuzzyWhere::Configuration do
         FuzzyWhere.configure { |c| c.predicates_file = nil }
       end
     end
-    context 'with forbidden predicates_file' do
-      let(:path) { FIXTURES_PATH.join('forbidden_predicates.yml') }
-      before do
-        FuzzyWhere.configure { |c| c.predicates_file = path }
-      end
-      it 'should raise FuzzyWhere::ConfigError' do
-        expect { config.fuzzy_predicate(:some_key) }.to raise_error(FuzzyWhere::ConfigError)
-      end
-      after do
-        FuzzyWhere.configure { |c| c.predicates_file = nil }
-      end
-    end
   end
 end
