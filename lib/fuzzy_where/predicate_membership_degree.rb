@@ -40,8 +40,7 @@ module FuzzyWhere
     def decreasing
       "CASE WHEN #{less_than(:core2, true)} THEN 1.0 "\
       "WHEN #{greater_than(:core2)} AND #{less_than(:max)} THEN "\
-      "(#{right_border_formula}) "\
-      'ELSE 0 END'
+      "(#{right_border_formula}) ELSE 0 END"
     end
 
     # Incresing function calculation
@@ -49,8 +48,7 @@ module FuzzyWhere
     def increasing
       "CASE WHEN #{greater_than(:core1, true)} THEN 1.0 "\
       "WHEN #{greater_than(:min)} AND #{less_than(:core1)} THEN "\
-      "(#{left_border_formula}) "\
-      'ELSE 0 END'
+      "(#{left_border_formula}) ELSE 0 END"
     end
 
     # Unimodal function calculation
@@ -61,8 +59,7 @@ module FuzzyWhere
       "WHEN #{greater_than(:min)} AND #{less_than(:core1)} THEN "\
       "(#{left_border_formula})"\
       "WHEN #{greater_than(:core2)} AND #{less_than(:max)} THEN "\
-      "(#{right_border_formula}) "\
-      'ELSE 0 END'
+      "(#{right_border_formula}) ELSE 0 END"
     end
 
     def greater_than(x, equal = false)
