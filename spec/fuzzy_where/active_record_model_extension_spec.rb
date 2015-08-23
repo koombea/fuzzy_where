@@ -10,6 +10,7 @@ if defined? ActiveRecord
       it 'works with #respond_to?' do
         expect(ARStandIn).to respond_to :fuzzy_where
       end
+
       it "doesn't break #respond_to?" do
         expect { ARStandIn.respond_to?(:abstract_class?) }.to_not raise_error
       end
@@ -72,6 +73,10 @@ if defined? ActiveRecord
 
       it 'searches People with old age' do
         expect(PersonFuzzy.fuzzy_where(age: :old)).to match_array olds
+      end
+
+      it 'raises ArgumentError on invalid params' do
+        expect { PersonFuzzy.fuzzy_where('age = young') }.to raise_error(ArgumentError)
       end
 
       after do
