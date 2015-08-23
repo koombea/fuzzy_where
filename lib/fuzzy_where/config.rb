@@ -5,17 +5,18 @@ require 'active_support/configurable'
 
 # SQLf implementation for ActiveRecord
 module FuzzyWhere
-  # Configures global settings for FuzzyWhere
-  #   FuzzyWhere.configure do |config|
-  #     config.where_method_name = :fuzzy_where
-  #   end
-  def self.configure(&_block)
-    yield @config ||= FuzzyWhere::Configuration.new
-  end
+  class << self
+    # @!attribute [r] config
+    #   @return [FuzzyWhere::Configuration] gem configuration
+    attr_reader :config
 
-  # Global settings for FuzzyWhere
-  def self.config
-    @config
+    # Configures global settings for FuzzyWhere
+    #   FuzzyWhere.configure do |config|
+    #     config.where_method_name = :fuzzy_where
+    #   end
+    def configure(&_block)
+      yield @config ||= FuzzyWhere::Configuration.new
+    end
   end
 
   # {FuzzyWhere} Configuration class
@@ -47,17 +48,15 @@ module FuzzyWhere
     # @return [Hash] fuzzy predicate definitions
     def load_yml(path)
       fail ConfigError, 'The configuration file is not defined.' unless path
-
-      path = path.is_a?(Pathname) ? path : Pathname.new(path)
-
-      if !path.exist?
+      file = path.is_a?(Pathname) ? path : Pathname.new(path)
+      if !file.exist?
         fail ConfigError, "The configuration file #{@path} was not found."
-      elsif !path.file?
+      elsif !file.file?
         fail ConfigError, "The configuration file #{@path} is not a file."
-      elsif !path.readable?
+      elsif !file.readable?
         fail ConfigError, "The configuration file #{@path} is not readable."
       end
-      HashWithIndifferentAccess.new(YAML.load_file(path))
+      HashWithIndifferentAccess.new(YAML.load_file(file))
     end
   end
 

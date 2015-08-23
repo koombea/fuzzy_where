@@ -60,5 +60,28 @@ describe FuzzyWhere::Configuration do
         FuzzyWhere.configure { |c| c.predicates_file = nil }
       end
     end
+    context 'with invalid file' do
+      before do
+        FuzzyWhere.configure { |c| c.predicates_file = '../some/path' }
+      end
+      it 'should raise FuzzyWhere::ConfigError' do
+        expect { config.fuzzy_predicate(:some_key) }.to raise_error(FuzzyWhere::ConfigError)
+      end
+      after do
+        FuzzyWhere.configure { |c| c.predicates_file = nil }
+      end
+    end
+    context 'with directory configuration' do
+      let(:path) { FIXTURES_PATH }
+      before do
+        FuzzyWhere.configure { |c| c.predicates_file = path }
+      end
+      it 'should raise FuzzyWhere::ConfigError' do
+        expect { config.fuzzy_predicate(:some_key) }.to raise_error(FuzzyWhere::ConfigError)
+      end
+      after do
+        FuzzyWhere.configure { |c| c.predicates_file = nil }
+      end
+    end
   end
 end
