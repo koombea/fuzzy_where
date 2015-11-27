@@ -12,7 +12,8 @@ DESC
       # Add Fuzzy predicate
       def add_fuzzy_predicate
         return if attributes.empty?
-        append_to_file 'config/fuzzy_predicates.yml', predicate_content(name, attributes)
+        append_to_file 'config/fuzzy_predicates.yml',
+                       predicate_content(name, attributes)
       end
 
       private

@@ -17,8 +17,8 @@ module FuzzyWhere
       @fuzzy_predicate = fuzzy_predicate
     end
 
-    # Take instance attributtes and return a calculations for them
-    # Based on fuzzzy set trapezium function
+    # Take instance attributes and return a calculations for them
+    # Based on fuzzy set trapezium function
     # @return [String] the calculation query to be used for the column
     def membership_function
       min = @fuzzy_predicate[:min]
@@ -30,7 +30,6 @@ module FuzzyWhere
                      else
                        unimodal
                      end
-      @calculation
     end
 
     private
@@ -43,7 +42,7 @@ module FuzzyWhere
       "(#{right_border_formula}) ELSE 0 END"
     end
 
-    # Incresing function calculation
+    # Increasing function calculation
     # @return [String] condition representation for membership calculation
     def increasing
       "CASE WHEN #{greater_than(:core1, true)} THEN 1.0 "\

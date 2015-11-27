@@ -13,6 +13,7 @@ require 'bundler/setup'
 Bundler.require
 
 FIXTURES_PATH = Pathname.new(File.expand_path('../fixtures/', __FILE__))
+
 if defined? ActiveRecord
   require 'support/active_record/config'
   require 'support/active_record/migrations'

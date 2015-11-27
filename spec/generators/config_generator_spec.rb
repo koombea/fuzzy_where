@@ -16,4 +16,8 @@ describe FuzzyWhere::Generators::ConfigGenerator, type: :generator do
   it 'copies predicates file' do
     assert_file 'config/fuzzy_predicates.yml'
   end
+
+  it 'copies quantifiers file' do
+    assert_file 'config/fuzzy_quantifiers.yml'
+  end
 end

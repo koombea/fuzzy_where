@@ -27,7 +27,7 @@ module MembershipComparator
   end
 end
 
-RSpec::Matchers.define :be_decreacing_function do |table, column, predicate|
+RSpec::Matchers.define :be_decreasing_function do |table, column, predicate|
   include MembershipComparator
   match do |result|
     @table = table
@@ -48,13 +48,12 @@ RSpec::Matchers.define :be_decreacing_function do |table, column, predicate|
   end
 end
 
-RSpec::Matchers.define :be_increacing_function do |table, column, predicate|
+RSpec::Matchers.define :be_increasing_function do |table, column, predicate|
   include MembershipComparator
   match do |result|
     @table = table
     @column = column
     @predicate = predicate
-    puts "predicate=#{predicate}"
     result == increasing
   end
 
@@ -76,7 +75,6 @@ RSpec::Matchers.define :be_unimodal_function do |table, column, predicate|
     @table = table
     @column = column
     @predicate = predicate
-    puts "predicate=#{predicate}"
     result == unimodal
   end
 

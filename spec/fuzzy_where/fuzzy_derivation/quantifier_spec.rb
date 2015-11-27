@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 if defined? ActiveRecord
-  describe FuzzyWhere::FuzzyDerivation do
+  describe FuzzyWhere::Derivation::Quantifier do
     describe '#derivative_conditions' do
       skip 'Pending test'
     end
