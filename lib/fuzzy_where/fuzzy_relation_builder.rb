@@ -30,6 +30,7 @@ module FuzzyWhere
       @table = table
       @conditions = conditions
       @relation = relation
+      @calibration = calibration
       @membership_degrees = []
     end
 
@@ -39,10 +40,24 @@ module FuzzyWhere
     def build
       process_conditions
       add_membership_column
+      add_calibration_column
       order_by_membership_degree
     end
 
     private
+
+    def calibration
+      @calibration = @conditions.delete(FuzzyWhere.config.calibration_name)
+      @calibration ||= 0.5
+      validate_calibration
+    end
+
+    def validate_calibration
+      Float @calibration
+    rescue
+      raise ArgumentError,
+            "calibration must be a Float, got #{@calibration.inspect}"
+    end
 
     def process_conditions
       @conditions.each do |column, predicate|
@@ -75,6 +90,10 @@ module FuzzyWhere
       name = FuzzyWhere.config.membership_degree_column_name
       @relation = @relation
                   .select("#{@table}.*, (#{membership_degree}) AS #{name}")
+    end
+
+    def add_calibration_column
+      @relation = @relation.where("(#{membership_degree}) >= ?", @calibration)
     end
 
     def membership_degree

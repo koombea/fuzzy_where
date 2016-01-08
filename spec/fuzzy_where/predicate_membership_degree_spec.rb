@@ -10,9 +10,9 @@ describe FuzzyWhere::PredicateMembershipDegree do
       #   core2: 10
       #   max: 14
       let!(:kid) { { min: 'infinite', core1: 'infinite', core2: 10, max: 14 } }
-      it 'should be decreacing function' do
+      it 'should be decreasing function' do
         membership = FuzzyWhere::PredicateMembershipDegree.new('people', 'age', kid)
-        expect(membership.membership_function).to be_decreacing_function('people', 'age', kid)
+        expect(membership.membership_function).to be_decreasing_function('people', 'age', kid)
       end
     end
     context 'increasing function' do
@@ -22,9 +22,9 @@ describe FuzzyWhere::PredicateMembershipDegree do
       #   core2: infinite
       #   max: infinite
       let!(:old) { { min: 48, core1: 55, core2: 'infinite', max: 'infinite' } }
-      it 'should be increacing function' do
+      it 'should be increasing function' do
         membership = FuzzyWhere::PredicateMembershipDegree.new('people', 'age', old)
-        expect(membership.membership_function).to be_increacing_function('people', 'age', old)
+        expect(membership.membership_function).to be_increasing_function('people', 'age', old)
       end
     end
     context 'unimodal function' do
