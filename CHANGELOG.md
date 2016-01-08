@@ -1,4 +1,7 @@
 ### master
+
+### 0.6.0 - 2016-01-08
+
 * Travis, coveralls and code climate integrations
 * Add calibration option to `fuzzy_where`
 
