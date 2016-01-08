@@ -7,7 +7,7 @@ module FuzzyWhere
 
       desc <<DESC
 Description:
-    Copies FuzzyWhere configuration file to your application's initializer directory.
+    Copies FuzzyWhere configuration files to your application's initializer directory.
 DESC
       # Create FuzzyWhere config file
       def copy_config_file

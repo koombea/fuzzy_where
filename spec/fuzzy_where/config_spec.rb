@@ -22,6 +22,25 @@ describe FuzzyWhere::Configuration do
     end
   end
 
+  describe 'calibration_name' do
+    context 'by default' do
+      it 'should be calibration' do
+        expect(config.calibration_name).to eq :calibration
+      end
+    end
+    context 'configured via config block' do
+      before do
+        FuzzyWhere.configure { |c| c.calibration_name = :test }
+      end
+      it 'should be test' do
+        expect(config.calibration_name).to eq :test
+      end
+      after do
+        FuzzyWhere.configure { |c| c.calibration_name = :calibration }
+      end
+    end
+  end
+
   describe 'predicates_file' do
     context 'by default' do
       it 'should be nil' do

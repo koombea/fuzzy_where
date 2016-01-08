@@ -29,6 +29,9 @@ module FuzzyWhere
     # @!attribute [rw] membership_degree_column_name
     #   @return [String] membership degree column name definition
     config_accessor :membership_degree_column_name
+    # @!attribute [rw] calibration_name
+    #   @return [String] calibration condition name definition
+    config_accessor :calibration_name
     # @!attribute [rw] predicates_file
     #   configuration file location
     config_accessor :predicates_file
@@ -50,11 +53,11 @@ module FuzzyWhere
       fail ConfigError, 'The configuration file is not defined.' unless path
       file = path.is_a?(Pathname) ? path : Pathname.new(path)
       if !file.exist?
-        fail ConfigError, "The configuration file #{@path} was not found."
+        fail ConfigError, "The configuration file #{path} was not found."
       elsif !file.file?
-        fail ConfigError, "The configuration file #{@path} is not a file."
+        fail ConfigError, "The configuration file #{path} is not a file."
       elsif !file.readable?
-        fail ConfigError, "The configuration file #{@path} is not readable."
+        fail ConfigError, "The configuration file #{path} is not readable."
       end
       HashWithIndifferentAccess.new(YAML.load_file(file))
     end
@@ -63,5 +66,6 @@ module FuzzyWhere
   configure do |config|
     config.where_method_name = :fuzzy_where
     config.membership_degree_column_name = :membership_degree
+    config.calibration_name = :calibration
   end
 end
