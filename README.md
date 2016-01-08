@@ -77,4 +77,4 @@ Person.fuzzy_where(age: :young)
 
 ## License
 
-MIT License. Copyright 2015 Koombea. http://koombea.com
+MIT License. Copyright 2015-2016 Koombea. http://koombea.com
