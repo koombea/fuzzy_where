@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gem 'activerecord', '~> 4.2.0', require: 'active_record'
 gem 'test-unit'
-gem 'rspec-rails', '~> 3.2.0'
-gem 'generator_spec', '~>0.9.0'
+gem 'rspec-rails', '~> 3.4.0'
+gem 'generator_spec', '~>0.9'
 
 platforms :ruby do
   if RUBY_VERSION > '2.1.0'
