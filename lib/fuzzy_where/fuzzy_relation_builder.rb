@@ -70,13 +70,13 @@ module FuzzyWhere
 
     def load_fuzzy_predicate_definition(predicate)
       pred_def = FuzzyWhere.config.fuzzy_predicate(predicate)
-      fail FuzzyError, "couldn't find fuzzy definition" unless pred_def
+      raise FuzzyError, "couldn't find fuzzy definition" unless pred_def
       pred_def
     end
 
     def derivate_condition(column, pred_def)
       FuzzyDerivation.new(@relation, @table, column, pred_def)
-        .derivative_condition
+                     .derivative_condition
     end
 
     def membership_degree_function(column, pred_def)

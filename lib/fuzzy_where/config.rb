@@ -41,7 +41,7 @@ module FuzzyWhere
     # @return [Hash] fuzzy predicate definition
     def fuzzy_predicate(key)
       @fuzzy_predicates = load_yml(predicates_file)
-      @fuzzy_predicates["#{key}"]
+      @fuzzy_predicates[key.to_s]
     end
 
     private
@@ -50,14 +50,14 @@ module FuzzyWhere
     # @param path [Object] predicates definition location
     # @return [Hash] fuzzy predicate definitions
     def load_yml(path)
-      fail ConfigError, 'The configuration file is not defined.' unless path
+      raise ConfigError, 'The configuration file is not defined.' unless path
       file = path.is_a?(Pathname) ? path : Pathname.new(path)
       if !file.exist?
-        fail ConfigError, "The configuration file #{path} was not found."
+        raise ConfigError, "The configuration file #{path} was not found."
       elsif !file.file?
-        fail ConfigError, "The configuration file #{path} is not a file."
+        raise ConfigError, "The configuration file #{path} is not a file."
       elsif !file.readable?
-        fail ConfigError, "The configuration file #{path} is not readable."
+        raise ConfigError, "The configuration file #{path} is not readable."
       end
       HashWithIndifferentAccess.new(YAML.load_file(file))
     end
